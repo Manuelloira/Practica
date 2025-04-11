@@ -1,5 +1,8 @@
 package edu.loira.Practica.model;
 
+
+import java.util.List;
+
 import edu.loira.Practica.enumerated.Dificultad;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,6 +10,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +24,10 @@ public class Asignatura {
     @Enumerated(EnumType.STRING)
     @Column(name = "dificultad", nullable = false, columnDefinition = "ENUM('BAJA', 'MEDIA', 'ALTA')")
     private Dificultad dificultad;
+
+    @OneToMany(mappedBy = "asignatura", cascade = jakarta.persistence.CascadeType.ALL, fetch = jakarta.persistence.FetchType.EAGER) 
+    // Relación uno a muchos con la entidad Factura
+    private List<Alumno> lista_alumnos;
 
     public Asignatura(String nombre, Dificultad dificultad) {
         this.nombre = nombre;

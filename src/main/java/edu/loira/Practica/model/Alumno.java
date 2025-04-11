@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +16,13 @@ public class Alumno {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id_alumno;
+
+@ManyToOne
+    // Relación muchos a uno con la entidad Cliente
+    // Se utiliza el atributo "mappedBy" para indicar que la relación es bidireccional
+    @JoinColumn(name = "id_asignatura", referencedColumnName = "id_asignatura")
+    // Se utiliza la anotación JoinColumn para especificar la columna de unión
+    private Asignatura asignatura;
 @Column(name = "nombre", nullable = false, length = 50)
 private String nombre;
 @Column(name = "apellidos", nullable = false, length = 50)
@@ -28,6 +37,7 @@ private String telefono;
 private String direccion;
 @Column(name = "fecha_nacimiento", nullable = false, length = 50)
 private String fecha_nacimiento;
+
 
 
     public Alumno(String nombre, String apellidos, String dni, String email, String telefono, String direccion,
