@@ -10,6 +10,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -27,8 +28,10 @@ public class Asignatura {
 
     @OneToMany(mappedBy = "asignatura", cascade = jakarta.persistence.CascadeType.ALL, fetch = jakarta.persistence.FetchType.EAGER) 
     // Relación uno a muchos con la entidad Factura
-    private List<Alumno> lista_alumnos;
-
+    private List<Expediente> lista_expediente;
+ 
+    @ManyToMany(mappedBy = "asignaturas")
+    private List<Profesor> profesores;
     public Asignatura(String nombre, Dificultad dificultad) {
         this.nombre = nombre;
         this.dificultad = dificultad;
